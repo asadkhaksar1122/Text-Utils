@@ -4,7 +4,7 @@ import { changetext } from "./features/textslice";
 
 export default function Modal() {
   let dispatch = useDispatch();
-  let { text } = useSelector((state) => state.text);
+  let { text, mode } = useSelector((state) => state.text);
 
   const [value, setvalue] = useState({
     replace: "",
@@ -15,17 +15,44 @@ export default function Modal() {
   }
 
   function handlesubmit() {
-    let replacedtext = text.replace(
-      new RegExp(value.replace, "g"),
-      value.replacewith
-    );
-    dispatch(changetext(replacedtext));
-    setvalue({
-      replace: "",
-      replacewith: "",
-    });
-    $("#replaceModal").modal("hide");
+    function escapeRegExp(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    }
+
+    // Ensure value is defined and has the expected properties
+    if (
+      value &&
+      typeof value.replace === "string" &&
+      typeof value.replacewith === "string"
+    ) {
+      let replacedtext = text.replace(
+        new RegExp(escapeRegExp(value.replace.toLowerCase()), "g"),
+        value.replacewith
+      );
+
+      dispatch(changetext(replacedtext));
+
+      // Reset the value object
+      setvalue({
+        replace: "",
+        replacewith: "",
+      });
+
+      // Hide the modal
+      $("#replaceModal").modal("hide");
+    } else {
+      console.error("Invalid value object:", value);
+      // Handle the error, e.g., show a message to the user
+    }
   }
+  let customstyle = {
+    backgroundColor: mode == "dark" ? "#2c3e50" : "white",
+    color: mode == "dark" ? "white" : "#2c3e50",
+  };
+  let inputstyle = {
+    backgroundColor: mode == "dark" ? "#95a5a6" : "white",
+    color: mode == "dark" ? "#F7F7F7" : "black",
+  };
   return (
     <>
       <div
@@ -38,12 +65,12 @@ export default function Modal() {
       >
         <div className="modal-dialog" role="document">
           <div className="modal-content">
-            <div className="modal-header">
+            <div className="modal-header" style={customstyle}>
               <h5 className="modal-title" id="replaceModalLabel">
                 Replace Text
               </h5>
             </div>
-            <div className="modal-body">
+            <div className="modal-body" style={customstyle}>
               <form id="replaceForm">
                 <div className="form-group">
                   <label htmlFor="replaceText">Replace Text</label>
@@ -55,6 +82,7 @@ export default function Modal() {
                     name="replace"
                     onChange={handlechange}
                     value={value.replace}
+                    style={inputstyle}
                   />
                 </div>
                 <div className="form-group">
@@ -67,11 +95,12 @@ export default function Modal() {
                     name="replacewith"
                     onChange={handlechange}
                     value={value.replacewith}
+                    style={inputstyle}
                   />
                 </div>
               </form>
             </div>
-            <div className="modal-footer">
+            <div className="modal-footer" style={customstyle}>
               <button
                 type="button"
                 className="btn btn-secondary"

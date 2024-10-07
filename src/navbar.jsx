@@ -11,12 +11,12 @@ export default function Navbar() {
   return (
     <nav
       className={`navbar ${
-        mode == "dark" ? "bg-dark text-light" : "bg-light text-dark"
+        mode === "dark" ? "bg-dark text-light" : "bg-light text-dark"
       }`}
     >
-      <div className="container-fluid">
+      <div className="container-fluid d-flex justify-content-between align-items-center">
         <a
-          className={`navbar-brand ${mode == "dark" ? "text-white" : ""}`}
+          className={`navbar-brand ${mode === "dark" ? "text-white" : ""}`}
           href="#"
         >
           <img
@@ -27,11 +27,16 @@ export default function Navbar() {
             className="d-inline-block align-text-top"
           />
           Text Utils
-          <span role="img" aria-label="sun" onClick={togglemode}>
-            {" "}
-            {mode == "dark" ? "☀️" : "🌙"}
-          </span>
         </a>
+        <span
+          role="img"
+          aria-label="sun"
+          onClick={togglemode}
+          style={{ cursor: "pointer", fontSize: "23px" }}
+          title={`Enable ${mode=="dark"?"Light":"Dark"} Mode`}
+        >
+          {mode === "dark" ? "☀️" : "🌙"}
+        </span>
       </div>
     </nav>
   );

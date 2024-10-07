@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 import {
   averageWordLength,
+  calculateReadingTimeFast,
+  calculateReadingTimeSlow,
   countQuestionMarks,
   countSentences,
   countSpecialCharacters,
@@ -11,8 +13,8 @@ export default function Summary() {
   let { text } = useSelector((state) => state.text);
   return (
     <div className="container">
-      <h2 className="mt-2">Text Summary</h2>
       <div>
+        <h4 className="mt-2">Text Summary</h4>
         <span className="mt-2 ml-1">
           Characters <strong>{text.length}</strong>
         </span>{" "}
@@ -20,7 +22,9 @@ export default function Summary() {
         <span className="mt-2 ml-1">
           Words{" "}
           <strong>
-            {text.split(" ").filter((element) => element != "").length}
+            {text
+              ? text.split(" ").filter((element) => element != "").length
+              : 0}
           </strong>
         </span>
         &nbsp;
@@ -43,6 +47,20 @@ export default function Summary() {
         <span className="mt-2 ml-1">
           Special Characters <strong>{countSpecialCharacters(text)}</strong>
         </span>
+      </div>
+      <div>
+        <h4 className="my-2">Time To Read</h4>
+        <p>
+          <span>
+            Fast Reading{" "}
+            <strong>{calculateReadingTimeFast(text)}minute(s)</strong>
+          </span>
+          &nbsp;
+          <span>
+            Slow Reading{" "}
+            <strong>{calculateReadingTimeSlow(text)}minute(s)</strong>
+          </span>
+        </p>
       </div>
     </div>
   );

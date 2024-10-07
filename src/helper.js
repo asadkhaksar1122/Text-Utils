@@ -77,12 +77,8 @@ function extractEmailsFromString(str) {
 }
 
 function extractNumbersFromString(str) {
-  // Use a regular expression to match all sequences of digits in the string
   const matches = str.match(/\d+/g);
-
-  // If matches are found, convert them to numbers and return as an array
-  // If no matches are found, return an empty array
-  return matches ? matches.map(Number) : [].join(" ") || "";
+  return matches ? matches.join(" ") : "";
 }
 function extractSpecialCharacters(str) {
   // Regular expression to match special characters

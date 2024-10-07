@@ -40,7 +40,7 @@ function averageWordLength(text) {
   const averageLength =
     filteredWords.length > 0 ? totalLength / filteredWords.length : 0;
 
-  return averageLength;
+  return averageLength.toFixed(2);
 }
 
 function countQuestionMarks(text) {
@@ -70,10 +70,26 @@ function countSpecialCharacters(text) {
   return matches ? matches.length : 0;
 }
 
+function calculateReadingTimeFast(text) {
+  const wordsPerMinuteFast = 300;
+  const words = text.split(/\s+/).length;
+  const minutes = words / wordsPerMinuteFast;
+  return minutes.toFixed(2);
+}
+
+function calculateReadingTimeSlow(text) {
+  const wordsPerMinuteSlow = 150;
+  const words = text.split(/\s+/).length;
+  const minutes = words / wordsPerMinuteSlow;
+  return minutes.toFixed(2);
+}
+
 export {
   countSentences,
   countstatement,
   averageWordLength,
   countQuestionMarks,
   countSpecialCharacters,
+  calculateReadingTimeFast,
+  calculateReadingTimeSlow,
 };
