@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Coding-quiz/static/css/main.3c5c0cf4.css",
+    "main.js": "/Coding-quiz/static/js/main.e05d999d.js",
+    "static/js/453.2b0627e5.chunk.js": "/Coding-quiz/static/js/453.2b0627e5.chunk.js",
+    "index.html": "/Coding-quiz/index.html",
+    "main.3c5c0cf4.css.map": "/Coding-quiz/static/css/main.3c5c0cf4.css.map",
+    "main.e05d999d.js.map": "/Coding-quiz/static/js/main.e05d999d.js.map",
+    "453.2b0627e5.chunk.js.map": "/Coding-quiz/static/js/453.2b0627e5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3c5c0cf4.css",
+    "static/js/main.e05d999d.js"
+  ]
+}
